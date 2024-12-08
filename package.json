@@ -1,0 +1,8 @@
+{
+  "name": "advent-of-code-2024",
+  "private": false,
+  "version": "0.0.0",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  }
+}
