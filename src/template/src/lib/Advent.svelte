@@ -3,19 +3,20 @@
   import PartTwo from './PartTwo.svelte';
   import { onMount } from 'svelte';
 
-  let text = '';
+  let lists: number[] = [];
 
   onMount(async () => {
+    let text='';
     const response = await fetch('input.txt');
     if (response.ok) text = await response.text();
     else console.error("failed to load the file.");
   });
 </script>
 
-{#if text.length > 0}
-  <PartOne text="{text}" />
-  <PartTwo text="{text}" />
+{#if lists.length > 0}
+  <PartOne lists="{lists}" />
+  <PartTwo lists="{lists}" />
 {:else}
-  <PartOne text="loading..." />
-  <PartTwo text="loading..." />
+  <PartOne lists="loading..." />
+  <PartTwo lists="loading..." />
 {/if}

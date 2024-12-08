@@ -1,5 +1,5 @@
 <script lang="ts">
-  const { text } = $props();
+  const { lists } = $props();
   let res: number = $state(0);
 </script>
 
