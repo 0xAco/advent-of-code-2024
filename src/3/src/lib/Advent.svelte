@@ -3,7 +3,7 @@
   import PartTwo from './PartTwo.svelte';
   import { onMount } from 'svelte';
 
-  let lists: number[] = [];
+  const lists: number[]|never = [];
 
   onMount(async () => {
     let text='';
