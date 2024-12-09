@@ -3,20 +3,25 @@
   import PartTwo from './PartTwo.svelte';
   import { onMount } from 'svelte';
 
-  const lists: number[]|never = [];
+  let instructions: string[] = [];
+
+  function parse(text: string) {
+    instructions = [...text.match(/do\(\)|don't\(\)|mul\(\d+,\d+\)/gm)];
+  }
 
   onMount(async () => {
     let text='';
     const response = await fetch('input.txt');
     if (response.ok) text = await response.text();
     else console.error("failed to load the file.");
+    parse(await text);
   });
 </script>
 
-{#if lists.length > 0}
-  <PartOne lists="{lists}" />
-  <PartTwo lists="{lists}" />
+{#if instructions.length > 0}
+  <PartOne instructions="{instructions}" />
+  <PartTwo instructions="{instructions}" />
 {:else}
-  <PartOne lists="loading..." />
-  <PartTwo lists="loading..." />
+  <PartOne instructions="loading..." />
+  <PartTwo instructions="loading..." />
 {/if}
