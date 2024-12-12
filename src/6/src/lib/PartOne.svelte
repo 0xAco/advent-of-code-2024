@@ -40,6 +40,7 @@
   function computeGuard(): Set<string> {
     const visited = new Set<string>;
     let guardPos: Position = findGuard();
+    let startPos: Position = {...guardPos};
     let direction: Direction = 'N';
 
     visited.add('x' + guardPos.x + 'y' + guardPos.y);
@@ -51,6 +52,9 @@
         direction = rotateRight(direction);
       } else {
         visited.add('x' + guardPos.x + 'y' + guardPos.y);
+
+        // update map for visuals
+        labMap[guardPos.x][guardPos.y] = 'X';
         
         // update for next loop
         guardPos.x = next.x
@@ -59,6 +63,13 @@
     } while(getNextCell(guardPos, direction).x >= 0 && getNextCell(guardPos, direction).x < labMap.length && getNextCell(guardPos, direction).y >= 0 && getNextCell(guardPos, direction).y < labMap[0].length);
 
     visited.add('x' + guardPos.x + 'y' + guardPos.y);
+    labMap[guardPos.x][guardPos.y] = 'X';
+    labMap[startPos.x][startPos.y] = '^';
+
+    // console.group();
+    // for (const row of labMap) console.log(row);
+    // console.groupEnd();
+
     return visited;
   }
 

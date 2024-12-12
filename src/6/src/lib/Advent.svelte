@@ -8,8 +8,9 @@
 
   onMount(async () => {
     let text='';
-    const response = await fetch('input.txt');
     // const response = await fetch('example.txt');
+    // const response = await fetch('debug.txt');
+    const response = await fetch('input.txt');
     if (response.ok) text = await response.text();
     else console.error("failed to load the file.");
 
