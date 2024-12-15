@@ -1,22 +1,25 @@
 <script lang="ts">
-  import PartOne from './PartOne.svelte';
-  import PartTwo from './PartTwo.svelte';
-  import { onMount } from 'svelte';
+import PartOne from "./PartOne.svelte";
+import PartTwo from "./PartTwo.svelte";
+import { onMount } from "svelte";
 
-  let lists: number[] = [];
+let topmap: number[][] = [];
 
-  onMount(async () => {
-    let text='';
-    const response = await fetch('input.txt');
-    if (response.ok) text = await response.text();
-    else console.error("failed to load the file.");
-  });
+onMount(async () => {
+	let text = "";
+	const response = await fetch("input.txt");
+	// const response = await fetch("example.txt");
+	if (response.ok) text = await response.text();
+	else console.error("failed to load the file.");
+
+	topmap = text.split("\n").map((line) => line.split("").map((a) => +a));
+});
 </script>
 
-{#if lists.length > 0}
-  <PartOne lists="{lists}" />
-  <PartTwo lists="{lists}" />
+{#if topmap.length > 0}
+  <PartOne topmap="{topmap}" />
+  <PartTwo topmap="{topmap}" />
 {:else}
-  <PartOne lists="loading..." />
-  <PartTwo lists="loading..." />
+  <PartOne topmap="loading..." />
+  <PartTwo topmap="loading..." />
 {/if}
