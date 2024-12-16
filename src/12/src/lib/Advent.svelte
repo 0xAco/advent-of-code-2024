@@ -1,22 +1,25 @@
 <script lang="ts">
-  import PartOne from './PartOne.svelte';
-  import PartTwo from './PartTwo.svelte';
-  import { onMount } from 'svelte';
+import PartOne from "./PartOne.svelte";
+import PartTwo from "./PartTwo.svelte";
+import { onMount } from "svelte";
 
-  let lists: number[] = [];
+let garden: string[][] = [];
 
-  onMount(async () => {
-    let text='';
-    const response = await fetch('input.txt');
-    if (response.ok) text = await response.text();
-    else console.error("failed to load the file.");
-  });
+onMount(async () => {
+	let text = "";
+	// const response = await fetch("example.txt");
+	const response = await fetch("input.txt");
+	if (response.ok) text = await response.text();
+	else console.error("failed to load the file.");
+
+	garden = text.split("\n").map((line) => line.split(""));
+});
 </script>
 
-{#if lists.length > 0}
-  <PartOne lists="{lists}" />
-  <PartTwo lists="{lists}" />
+{#if garden.length > 0}
+  <PartOne garden="{garden}" />
+  <PartTwo garden="{garden}" />
 {:else}
-  <PartOne lists="loading..." />
-  <PartTwo lists="loading..." />
+  <PartOne garden="loading..." />
+  <PartTwo garden="loading..." />
 {/if}
