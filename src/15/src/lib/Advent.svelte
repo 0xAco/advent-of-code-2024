@@ -13,8 +13,13 @@ let inputs: Day15 = {
 };
 
 function parse(text) {
-	const split = text.split("\n\n");
-	console.log(split);
+	const split = text.split("\n\n").map((entry) => entry.split("\n"));
+	split[0] = split[0].map((line) => line.split(""));
+	split[1] = split[1].join("");
+	inputs = {
+		map: split[0],
+		instructions: split[1],
+	};
 }
 
 onMount(async () => {
@@ -24,9 +29,6 @@ onMount(async () => {
 	else console.error("failed to load the file.");
 
 	parse(text);
-
-	// biome-ignore lint/correctness/noSelfAssign: <explanation>
-	inputs = inputs; // svelte reactive
 });
 </script>
 
