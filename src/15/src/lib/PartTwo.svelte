@@ -196,7 +196,10 @@ if (typeof inputs !== "string") {
 	rover = getRoverPos();
 	for (const instruction of inputs.instructions) {
 		move(rover, instruction);
+		console.log(instruction);
+		printMap();
 	}
+	printMap();
 	res = computeGPS();
 	console.groupEnd();
 }
